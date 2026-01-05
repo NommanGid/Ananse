@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>CSS Complete Course — From Beginner to Expert</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<meta name="description" content="A comprehensive CSS course guide covering everything from basics to advanced techniques." />
+	<style>
+		:root{--bg:#f7fafc;--card:#fff;--muted:#6b7280;--accent:#2563eb;--max:1100px}
+		*{box-sizing:border-box}
+		body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#0f1724;background:var(--bg);line-height:1.5}
+		.site-header{background:transparent;padding:18px 0;border-bottom:1px solid rgba(15,23,42,0.04)}
+		.container{max-width:var(--max);margin:0 auto;padding:0 18px}
+		.header-inner{display:flex;align-items:center;justify-content:space-between}
+		.brand{font-weight:700;color:var(--accent);text-decoration:none;font-size:1.1rem}
+		.nav a{margin-left:14px;color:var(--muted);text-decoration:none}
+
+		main{display:flex;gap:20px;padding:22px 0}
+		aside{width:260px}
+		.sidebar{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+		.toc{list-style:none;margin:0;padding:0}
+		.toc a{display:block;padding:8px 6px;color:#0f1724;text-decoration:none;border-radius:6px}
+		.toc a:hover{background:#f1f5f9}
+		.toc a.active{background:#e6f0ff;color:var(--accent);font-weight:600}
+
+		article{flex:1;min-width:0}
+		.card{background:var(--card);padding:18px;border-radius:10px;box-shadow:0 6px 20px rgba(2,6,23,0.04);margin-bottom:18px}
+		h1,h2,h3{margin:0 0 10px}
+		p{margin:0 0 12px;color:#0f1724}
+		.muted{color:var(--muted)}
+
+		pre{background:#0b1220;color:#e6eef8;padding:12px;border-radius:8px;overflow:auto;font-family:ui-monospace,monospace;font-size:0.92rem}
+		.example-output{border:1px dashed rgba(2,6,23,0.06);padding:10px;border-radius:6px;background:#fff;margin-top:8px}
+
+		footer{padding:18px 0;color:var(--muted);font-size:0.9rem}
+
+		@media (max-width:900px){
+			main{flex-direction:column}
+			aside{width:100%}
+			/* show toggle button on small screens */
+			.toggle-sidebar{display:inline-flex}
+			/* when sidebar is collapsed hide it (toggled via JS) */
+			aside.collapsed{display:none}
+		}
+
+		/* Sidebar toggle button - hidden on desktop */
+		.toggle-sidebar{display:none;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;border:1px solid rgba(15,23,42,0.04);background:#fff;color:var(--text);cursor:pointer}
+		.toggle-sidebar:focus{outline:3px solid rgba(37,99,235,0.12);outline-offset:3px}
+		/* Page-specific override: keep h2 black in course page even when dark-mode is active */
+		body.css-course.dark-mode h2{ color:#000; }
+		/* Make links white on the course page when dark mode is active */
+		body.css-course.dark-mode a{ color:#ffffff; }
+		body.css-course.dark-mode a:visited{ color: #e6e6e6 }
+		body.css-course.dark-mode a:hover{ color:#dcdcdc; text-decoration:underline }
+	</style>
+	<!-- Prism for syntax highlighting in course examples -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+</head>
+<body class="css-course">
+	<header class="site-header">
+		<div class="container header-inner">
+			<a class="brand" href="index.html">Ananse</a>
+			<button id="darkModeToggle" class="dark-toggle" aria-pressed="false">Dark Mode</button>
+			<button id="sidebarToggle" class="toggle-sidebar" aria-controls="sidebar" aria-expanded="true">☰ Topics</button>
+			<nav class="nav" aria-label="Main navigation">
+				<a href="index.html">Home</a>
+				<a href="tutorials.html">Tutorials</a>
+				<a href="about.html">About</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="container">
+		<aside id="sidebar">
+			<div class="sidebar card" aria-labelledby="course-toc">
+				<h3 id="course-toc">Course Topics</h3>
+				<p class="muted">Jump to a lesson</p>
+				<nav>
+					<ul class="toc">
+						<li><a href="#beginner-level">Beginner Level — CSS Foundations</a></li>
+						<li><a href="#css-basics">1. CSS Basics</a></li>
+						<li><a href="#selectors">2. Selectors</a></li>
+						<li><a href="#colors-units">3. Colors & Units</a></li>
+						<li><a href="#text-fonts">4. Text & Fonts</a></li>
+						<li><a href="#box-model">5. Box Model</a></li>
+						<li><a href="#backgrounds-borders">6. Backgrounds & Borders</a></li>
+						<li><a href="#intermediate-level">Intermediate Level — Layout & Responsiveness</a></li>
+						<li><a href="#display-positioning">7. Display & Positioning</a></li>
+						<li><a href="#flexbox">8. Flexbox</a></li>
+						<li><a href="#css-grid">9. CSS Grid</a></li>
+						<li><a href="#responsive-design">10. Responsive Design</a></li>
+						<li><a href="#pseudo-classes-elements">11. Pseudo-classes & Elements</a></li>
+						<li><a href="#advanced-level">Advanced Level — Professional CSS</a></li>
+						<li><a href="#transitions-animations">12. Transitions & Animations</a></li>
+						<li><a href="#advanced-selectors">13. Advanced Selectors</a></li>
+						<li><a href="#css-variables">14. CSS Variables</a></li>
+						<li><a href="#specificity-cascade">15. Specificity & Cascade</a></li>
+						<li><a href="#overflow-visibility">16. Overflow & Visibility</a></li>
+						<li><a href="#expert-level">Expert / Master Level — Real-World CSS</a></li>
+						<li><a href="#modern-css">17. Modern CSS Features</a></li>
+						<li><a href="#architecture-organization">18. Architecture & Organization</a></li>
+						<li><a href="#preprocessors-tools">19. Preprocessors & Tools</a></li>
+					</ul>
+				</nav>
+			</div>
+		</aside>
+
+		<article>
+			<section class="card" aria-labelledby="course-title">
+				<h1 id="course-title">Complete CSS Course</h1>
+				<p class="muted">A comprehensive guide to CSS from beginner to expert. Learn how to style web pages, create layouts, and master modern CSS techniques.</p>
+				<h3>Course Overview</h3>
+				<p>This course is divided into three main levels:</p>
+				<ul>
+					<li><strong>Beginner Level — CSS Foundations:</strong> Understand how CSS works and style basic pages confidently.</li>
+					<li><strong>Intermediate Level — Layout & Responsiveness:</strong> Build real layouts that work on all screen sizes.</li>
+					<li><strong>Advanced Level — Professional CSS:</strong> Master advanced techniques and create professional, maintainable stylesheets.</li>
+				</ul>
+				<h3>Learning Path</h3>
+				<p>Start with CSS basics and progressively build your skills through 19 comprehensive lessons covering everything from selectors to modern CSS features.</p>
+			</section>
+
+			<!-- Beginner Level -->
+			<section id="beginner-level" class="card">
+				<h2>Beginner Level — CSS Foundations</h2>
+				<p><strong>Goal:</strong> Understand how CSS works and style basic pages confidently.</p>
+			</section>
+
+			<section id="css-basics" class="card">
+				<h2>1. CSS Basics</h2>
+				<h3>✅ What is CSS?</h3>
+				<p>CSS (Cascading Style Sheets) is used to make websites look good. HTML = structure 🧱 CSS = style 🎨</p>
+				<p>CSS controls:</p>
+				<ul>
+					<li>Colors</li>
+					<li>Fonts</li>
+					<li>Spacing</li>
+					<li>Layout</li>
+				</ul>
+
+				<h3>✅ How CSS Works</h3>
+				<p>CSS finds HTML elements and tells them how to look.</p>
+				<p>"Style all paragraphs blue" "Make this button bigger"</p>
+
+				<h3>✅ Inline vs Internal vs External CSS</h3>
+				<p>1️⃣ <strong>Inline CSS</strong> (inside an HTML tag)</p>
+				<pre><code>&lt;p style="color: red;"&gt;Hello!&lt;/p&gt;</code></pre>
+				<p>❌ Not recommended (messy)</p>
+
+				<p>2️⃣ <strong>Internal CSS</strong> (inside &lt;style&gt; tag)</p>
+				<pre><code>&lt;style&gt;
+  p {
+    color: blue;
+  }
+&lt;/style&gt;</code></pre>
+				<p>✔️ Good for small pages</p>
+
+				<p>3️⃣ <strong>External CSS</strong> (best way!)</p>
+				<pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+				<p>✔️ Clean ✔️ Reusable ✔️ Professional</p>
+
+				<h3>✅ CSS Syntax</h3>
+				<pre><code>selector {
+  property: value;
+}</code></pre>
+				<p>Example:</p>
+				<pre><code>p {
+  color: green;
+  font-size: 20px;
+}</code></pre>
+
+				<h3>✅ Comments in CSS</h3>
+				<pre><code>/* This is a comment */</code></pre>
+				<p>Used to explain code or temporarily disable it.</p>
+			</section>
+
+			<section id="selectors" class="card">
+				<h2>2. Selectors</h2>
+				<h3>🎯 Element Selector</h3>
+				<pre><code>p {
+  color: blue;
+}</code></pre>
+
+				<h3>🎯 Class Selector</h3>
+				<pre><code>.box {
+  background-color: yellow;
+}</code></pre>
+				<p>HTML:</p>
+				<pre><code>&lt;div class="box"&gt;&lt;/div&gt;</code></pre>
+
+				<h3>🎯 ID Selector</h3>
+				<pre><code>#header {
+  font-size: 30px;
+}</code></pre>
+				<p>⚠️ Use IDs only once per page.</p>
+
+				<h3>🎯 Grouping Selectors</h3>
+				<pre><code>h1, h2, p {
+  color: purple;
+}</code></pre>
+
+				<h3>🎯 Descendant Selector</h3>
+				<pre><code>div p {
+  color: red;
+}</code></pre>
+				<p>Targets p inside div.</p>
+
+				<h3>🎯 Child Selector</h3>
+				<pre><code>div > p {
+  color: green;
+}</code></pre>
+				<p>Only direct children.</p>
+
+				<h3>🎯 Attribute Selector</h3>
+				<pre><code>input[type="text"] {
+  border: 2px solid blue;
+}</code></pre>
+
+				<h3>🎯 Universal Selector</h3>
+				<pre><code>* {
+  margin: 0;
+}</code></pre>
+				<p>Targets everything.</p>
+			</section>
+
+			<section id="colors-units" class="card">
+				<h2>3. Colors & Units</h2>
+				<h3>🎨 Color Formats</h3>
+				<pre><code>color: #ff0000;      /* Hex */
+color: rgb(255,0,0);
+color: rgba(255,0,0,0.5);
+color: hsl(0,100%,50%);</code></pre>
+
+				<h3>📏 Units</h3>
+				<p><strong>Absolute</strong></p>
+				<ul>
+					<li>px → fixed size</li>
+				</ul>
+
+				<p><strong>Relative</strong></p>
+				<ul>
+					<li>% → based on parent</li>
+					<li>em → based on parent font</li>
+					<li>rem → based on root font</li>
+					<li>vw → viewport width</li>
+					<li>vh → viewport height</li>
+				</ul>
+			</section>
+
+			<section id="text-fonts" class="card">
+				<h2>4. Text & Fonts</h2>
+				<pre><code>p {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 2px;
+}</code></pre>
+
+				<h3>Text Styling</h3>
+				<pre><code>text-align: center;
+text-transform: uppercase;</code></pre>
+
+				<h3>Google Fonts</h3>
+				<ol>
+					<li>Pick a font</li>
+					<li>Add &lt;link&gt;</li>
+					<li>Use font-family</li>
+				</ol>
+			</section>
+
+			<section id="box-model" class="card">
+				<h2>5. Box Model (VERY IMPORTANT 🔥)</h2>
+				<p>Every element is a box:</p>
+				<p>Margin → Border → Padding → Content</p>
+
+				<pre><code>div {
+  padding: 20px;
+  border: 2px solid black;
+  margin: 10px;
+}</code></pre>
+
+				<h3>box-sizing</h3>
+				<pre><code>box-sizing: border-box;</code></pre>
+				<p>✔️ Makes sizing easier</p>
+
+				<h3>Margin Collapse</h3>
+				<p>Vertical margins can merge (top & bottom).</p>
+			</section>
+
+			<section id="backgrounds-borders" class="card">
+				<h2>6. Backgrounds & Borders</h2>
+				<pre><code>div {
+  background-color: lightblue;
+  background-image: url("image.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}</code></pre>
+
+				<h3>Borders</h3>
+				<pre><code>border: 2px solid red;
+border-radius: 10px;</code></pre>
+			</section>
+
+			<!-- Intermediate Level -->
+			<section id="intermediate-level" class="card">
+				<h2>🟡 Intermediate Level — Layout & Responsiveness</h2>
+				<p><strong>Goal:</strong> Build real layouts that work on all screen sizes.</p>
+			</section>
+
+			<section id="display-positioning" class="card">
+				<h2>7. Display & Positioning</h2>
+				<h3>Display</h3>
+				<pre><code>display: block;
+display: inline;
+display: inline-block;
+display: none;</code></pre>
+
+				<h3>Visibility</h3>
+				<pre><code>visibility: hidden;</code></pre>
+
+				<h3>Position</h3>
+				<pre><code>position: relative;
+position: absolute;
+position: fixed;
+position: sticky;</code></pre>
+
+				<h3>z-index</h3>
+				<p>Controls layer order (like stacking cards).</p>
+			</section>
+
+			<section id="flexbox" class="card">
+				<h2>8. Flexbox (MUST MASTER ⭐)</h2>
+				<h3>Flex Container</h3>
+				<pre><code>.container {
+  display: flex;
+}</code></pre>
+
+				<h3>Direction & Wrap</h3>
+				<pre><code>flex-direction: row;
+flex-wrap: wrap;</code></pre>
+
+				<h3>Alignment</h3>
+				<pre><code>justify-content: center;
+align-items: center;
+gap: 10px;</code></pre>
+
+				<h3>Real Example</h3>
+				<p>Navbars, cards, buttons, layouts.</p>
+			</section>
+
+			<section id="css-grid" class="card">
+				<h2>9. CSS Grid</h2>
+				<pre><code>.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}</code></pre>
+
+				<h3>Grid Areas</h3>
+				<pre><code>grid-template-areas:
+  "header header"
+  "sidebar main";</code></pre>
+
+				<h3>auto-fit & auto-fill</h3>
+				<p>Used for responsive grids.</p>
+			</section>
+
+			<section id="responsive-design" class="card">
+				<h2>10. Responsive Design</h2>
+				<h3>Media Queries</h3>
+				<pre><code>@media (max-width: 600px) {
+  body {
+    background: pink;
+  }
+}</code></pre>
+
+				<h3>Mobile-First</h3>
+				<p>Start small → scale up.</p>
+
+				<h3>Responsive Images</h3>
+				<pre><code>img {
+  max-width: 100%;
+}</code></pre>
+			</section>
+
+			<section id="pseudo-classes-elements" class="card">
+				<h2>11. Pseudo-classes & Elements</h2>
+				<h3>Pseudo-classes</h3>
+				<pre><code>button:hover {
+  background: red;
+}</code></pre>
+
+				<h3>Pseudo-elements</h3>
+				<pre><code>p::before {
+  content: "👉 ";
+}</code></pre>
+			</section>
+
+			<!-- Advanced Level -->
+			<section id="advanced-level" class="card">
+				<h2>🔵 Advanced Level — Professional CSS</h2>
+				<p><strong>Goal:</strong> Master advanced techniques and create professional, maintainable stylesheets.</p>
+			</section>
+
+			<section id="transitions-animations" class="card">
+				<h2>12. Transitions & Animations</h2>
+				<pre><code>button {
+  transition: background 0.3s;
+}</code></pre>
+
+				<h3>Transform</h3>
+				<pre><code>transform: scale(1.2);</code></pre>
+
+				<h3>Keyframes</h3>
+				<pre><code>@keyframes move {
+  from { left: 0; }
+  to { left: 100px; }
+}</code></pre>
+			</section>
+
+			<section id="advanced-selectors" class="card">
+				<h2>13. Advanced Selectors</h2>
+				<pre><code>:not(.active)
+:is(h1, h2)</code></pre>
+			</section>
+
+			<section id="css-variables" class="card">
+				<h2>14. CSS Variables</h2>
+				<pre><code>:root {
+  --main-color: blue;
+}
+
+p {
+  color: var(--main-color);
+}</code></pre>
+			</section>
+
+			<section id="specificity-cascade" class="card">
+				<h2>15. Specificity & Cascade (CRITICAL ⚠️)</h2>
+				<p>Priority order:</p>
+				<ol>
+					<li>Inline</li>
+					<li>ID</li>
+					<li>Class</li>
+					<li>Element</li>
+				</ol>
+
+				<p>Avoid:</p>
+				<pre><code>!important</code></pre>
+			</section>
+
+			<section id="overflow-visibility" class="card">
+				<h2>16. Overflow & Visibility</h2>
+				<pre><code>overflow: hidden;
+object-fit: cover;
+aspect-ratio: 16 / 9;</code></pre>
+			</section>
+				<!-- Expert / Master Level -->
+			<section id="expert-level" class="card">
+				<h2>🟣 Expert / Master Level — Real-World CSS</h2>
+				<p><strong>Goal:</strong> Apply CSS in professional projects with modern techniques and best practices.</p>
+			</section>
+
+			<section id="modern-css" class="card">
+				<h2>17. Modern CSS Features</h2>
+				<pre><code>font-size: clamp(16px, 5vw, 24px);
+margin-inline: 20px;
+:has(img) { border: 2px solid red; }</code></pre>
+			</section>
+
+			<section id="architecture-organization" class="card">
+				<h2>18. Architecture & Organization</h2>
+				<h3>BEM Example</h3>
+				<pre><code>.card__title--active</code></pre>
+				<p>Keeps CSS clean and readable.</p>
+			</section>
+
+			<section id="preprocessors-tools" class="card">
+				<h2>19. Preprocessors & Tools</h2>
+				<h3>SCSS</h3>
+				<pre><code>$color: blue;
+
+button {
+  color: $color;
+}</code></pre>
+			</section>
+		</article>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>&copy; 2025 Ananse — Complete CSS Course</p>
+		</div>
+	</footer>
+
+	<!-- Prism core + languages -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
+	<script src="js/dark-mode.js" defer></script>
+	<script src="js/course-toc.js" defer></script>
+	<script src="js/scroll-top.js" defer></script>
+
+	<!-- Toggle buttons for example outputs: hide outputs initially and add a Show/Hide button per example -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function(){
+	  document.querySelectorAll('.example-output').forEach(function(out, idx){
+	    // hide output initially
+	    out.style.display = 'none';
+
+	    // create toggle button
+	    var btn = document.createElement('button');
+	    btn.type = 'button';
+	    btn.className = 'btn small';
+	    btn.textContent = 'Show Output';
+
+	    btn.addEventListener('click', function(){
+	      var isHidden = out.style.display === 'none' || getComputedStyle(out).display === 'none';
+	      if(isHidden){ out.style.display = ''; btn.textContent = 'Hide Output'; }
+	      else { out.style.display = 'none'; btn.textContent = 'Show Output'; }
+	    });
+
+	    // insert the button before the output element
+	    out.parentNode.insertBefore(btn, out);
+	  });
+	});
+	</script>
+</body>
+</html>

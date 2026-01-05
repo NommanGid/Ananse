@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>JavaScript Foundations — From Beginner to Master</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<meta name="description" content="A comprehensive JavaScript course guide for kids learning to code, from basics to expert level." />
+	<style>
+		:root{--bg:#f7fafc;--card:#fff;--muted:#6b7280;--accent:#2563eb;--max:1100px}
+		*{box-sizing:border-box}
+		body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#0f1724;background:var(--bg);line-height:1.5}
+		.site-header{background:transparent;padding:18px 0;border-bottom:1px solid rgba(15,23,42,0.04)}
+		.container{max-width:var(--max);margin:0 auto;padding:0 18px}
+		.header-inner{display:flex;align-items:center;justify-content:space-between}
+		.brand{font-weight:700;color:var(--accent);text-decoration:none;font-size:1.1rem}
+		.nav a{margin-left:14px;color:var(--muted);text-decoration:none}
+
+		main{display:flex;gap:20px;padding:22px 0}
+		aside{width:260px}
+		.sidebar{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+		.toc{list-style:none;margin:0;padding:0}
+		.toc a{display:block;padding:8px 6px;color:#0f1724;text-decoration:none;border-radius:6px}
+		.toc a:hover{background:#f1f5f9}
+		.toc a.active{background:#e6f0ff;color:var(--accent);font-weight:600}
+
+		article{flex:1;min-width:0}
+		.card{background:var(--card);padding:18px;border-radius:10px;box-shadow:0 6px 20px rgba(2,6,23,0.04);margin-bottom:18px}
+		h1,h2,h3{margin:0 0 10px}
+		p{margin:0 0 12px;color:#0f1724}
+		.muted{color:var(--muted)}
+
+		pre{background:#0b1220;color:#e6eef8;padding:12px;border-radius:8px;overflow:auto;font-family:ui-monospace,monospace;font-size:0.92rem}
+		.example-output{border:1px dashed rgba(2,6,23,0.06);padding:10px;border-radius:6px;background:#fff;margin-top:8px}
+
+		footer{padding:18px 0;color:var(--muted);font-size:0.9rem}
+
+		@media (max-width:900px){
+			main{flex-direction:column}
+			aside{width:100%}
+			/* show toggle button on small screens */
+			.toggle-sidebar{display:inline-flex}
+			/* when sidebar is collapsed hide it (toggled via JS) */
+			aside.collapsed{display:none}
+		}
+
+		/* Sidebar toggle button - hidden on desktop */
+		.toggle-sidebar{display:none;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;border:1px solid rgba(15,23,42,0.04);background:#fff;color:var(--text);cursor:pointer}
+		.toggle-sidebar:focus{outline:3px solid rgba(37,99,235,0.12);outline-offset:3px}
+		/* Page-specific override: keep h2 black in course page even when dark-mode is active */
+		body.js-course.dark-mode h2{ color:#000; }
+		/* Make links white on the course page when dark mode is active */
+		body.js-course.dark-mode a{ color:#ffffff; }
+		body.js-course.dark-mode a:visited{ color: #e6e6e6 }
+		body.js-course.dark-mode a:hover{ color:#dcdcdc; text-decoration:underline }
+	</style>
+	<!-- Prism for syntax highlighting in course examples -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+</head>
+<body class="js-course">
+	<header class="site-header">
+		<div class="container header-inner">
+			<a class="brand" href="index.html">Ananse</a>
+			<button id="darkModeToggle" class="dark-toggle" aria-pressed="false">Dark Mode</button>
+			<button id="sidebarToggle" class="toggle-sidebar" aria-controls="sidebar" aria-expanded="true">☰ Topics</button>
+			<nav class="nav" aria-label="Main navigation">
+				<a href="index.html">Home</a>
+				<a href="tutorials.html">Tutorials</a>
+				<a href="about.html">About</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="container">
+		<aside id="sidebar">
+			<div class="sidebar card" aria-labelledby="course-toc">
+				<h3 id="course-toc">Course Topics</h3>
+				<p class="muted">Jump to a lesson</p>
+				<nav>
+					<ul class="toc">
+						<li><a href="#beginner-level">🌱 Beginner Level — JavaScript Foundations</a></li>
+						<li><a href="#javascript-basics">1. JavaScript Basics</a></li>
+						<li><a href="#variables-data-types">2. Variables & Data Types</a></li>
+						<li><a href="#operators">3. Operators</a></li>
+						<li><a href="#control-flow">4. Control Flow</a></li>
+						<li><a href="#loops">5. Loops</a></li>
+						<li><a href="#functions">6. Functions</a></li>
+						<li><a href="#intermediate-level">🟡 Intermediate Level — Core JavaScript</a></li>
+						<li><a href="#arrays">7. Arrays</a></li>
+						<li><a href="#objects">8. Objects</a></li>
+						<li><a href="#array-methods">9. Advanced Array Methods</a></li>
+						<li><a href="#strings-numbers">10. Strings & Numbers</a></li>
+						<li><a href="#scope-hoisting">11. Scope & Hoisting</a></li>
+						<li><a href="#dom-manipulation">12. DOM Manipulation</a></li>
+						<li><a href="#advanced-level">🔵 Advanced Level — Browser & Logic Mastery</a></li>
+						<li><a href="#events">13. Events</a></li>
+						<li><a href="#forms-user-input">14. Forms & User Input</a></li>
+						<li><a href="#timing-async">15. Timing & Async Basics</a></li>
+						<li><a href="#error-handling">16. Error Handling</a></li>
+						<li><a href="#advanced-functions">17. Advanced Functions</a></li>
+						<li><a href="#es6-features">18. ES6+ Features</a></li>
+						<li><a href="#asynchronous">19. Asynchronous JavaScript</a></li>
+						<li><a href="#fetch-apis">20. Fetch & APIs</a></li>
+						<li><a href="#modules">21. Modules</a></li>
+						<li><a href="#object-oriented">22. Object-Oriented JavaScript</a></li>
+						<li><a href="#memory-performance">23. Memory & Performance</a></li>
+						<li><a href="#design-patterns">24. Design Patterns</a></li>
+						<li><a href="#browser-apis">25. Browser APIs</a></li>
+						<li><a href="#testing-basics">26. Testing Basics</a></li>
+						<li><a href="#tooling-ecosystem">27. Tooling & Ecosystem</a></li>
+						<li><a href="#security-basics">28. Security Basics</a></li>
+						<li><a href="#safe-coding-habits">29. Safe Coding Habits</a></li>
+						<li><a href="#master-advanced">30. Master / Advanced Professional Level</a></li>
+						<li><a href="#javascript-internals">31. JavaScript Internals</a></li>
+						<li><a href="#design-patterns-advanced">32. Design Patterns</a></li>
+						<li><a href="#browser-apis-advanced">33. Browser APIs</a></li>
+						<li><a href="#testing-advanced">34. Testing Advanced</a></li>
+						<li><a href="#linting">35. Linting</a></li>
+						<li><a href="#bundlers">36. Bundlers (concept)</a></li>
+					</ul>
+				</nav>
+			</div>
+		</aside>
+
+		<article>
+			<section class="card" aria-labelledby="course-title">
+				<h1 id="course-title">JavaScript Foundations — From Beginner to Master</h1>
+				<p class="muted">A comprehensive JavaScript course guide for kids learning to code, from basics to expert level.</p>
+				<h3>Course Overview</h3>
+				<p>This course is divided into four main levels:</p>
+				<ul>
+					<li><strong>🌱 Beginner Level — JavaScript Foundations:</strong> Understand how JavaScript works and write basic logic confidently.</li>
+					<li><strong>🟡 Intermediate Level — Core JavaScript:</strong> Write reusable logic and interact with the page.</li>
+					<li><strong>🔵 Advanced Level — Browser & Logic Mastery:</strong> Build interactive, dynamic web apps.</li>
+					<li><strong>🟣 Expert / Master Level — Real-World JavaScript:</strong> Write JavaScript like a senior frontend developer.</li>
+				</ul>
+				<h3>Learning Path</h3>
+				<p>Start with JavaScript basics and progressively build your skills through 32 comprehensive lessons covering everything from variables to advanced patterns.</p>
+			</section>
+
+			<!-- Beginner Level -->
+			<section id="beginner-level" class="card">
+				<h2>🌱 Beginner Level — JavaScript Foundations</h2>
+				<p><strong>Goal:</strong> Understand how JavaScript works and write basic logic confidently.</p>
+			</section>
+
+			<section id="javascript-basics" class="card">
+				<h2>1. JavaScript Basics</h2>
+				<h3>✅ What is JavaScript?</h3>
+				<p>JavaScript (JS) makes websites interactive.</p>
+				<p>Think of a website like a robot 🤖:</p>
+				<ul>
+					<li>HTML = body</li>
+					<li>CSS = clothes</li>
+					<li>JavaScript = brain</li>
+				</ul>
+				<p>JavaScript can:</p>
+				<ul>
+					<li>React to clicks</li>
+					<li>Change text</li>
+					<li>Validate forms</li>
+					<li>Fetch data</li>
+				</ul>
+
+				<h3>✅ How JavaScript Runs in the Browser</h3>
+				<ul>
+					<li>Browser loads HTML</li>
+					<li>Browser loads CSS</li>
+					<li>Browser runs JavaScript line by line</li>
+					<li>JS runs after the page loads (usually).</li>
+				</ul>
+
+				<h3>✅ Script Tag (Inline vs External)</h3>
+				<h4>Inline JS</h4>
+				<pre><code>&lt;script&gt;
+  alert("Hello!"); 
+&lt;/script&gt;</code></pre>
+				<p>❌ Messy for big projects</p>
+
+				<h4>External JS (BEST)</h4>
+				<pre><code>&lt;script src="script.js"&gt;&lt;/script&gt;</code></pre>
+				<p>✔️ Clean ✔️ Reusable ✔️ Professional</p>
+
+				<h3>✅ Console & Debugging</h3>
+				<pre><code>console.log("Hello");</code></pre>
+				<p>The console helps you:</p>
+				<ul>
+					<li>See errors</li>
+					<li>Check values</li>
+					<li>Debug problems</li>
+				</ul>
+			</section>
+
+			<section id="variables-data-types" class="card">
+				<h2>2. Variables & Data Types</h2>
+				<h3>✅ Variables</h3>
+				<p>Variables store data.</p>
+				<pre><code>var name = "Alex";   // old
+let age = 12;       // modern
+const PI = 3.14;    // cannot change</code></pre>
+				<p>✔️ Use <strong>let</strong> and <strong>const</strong> ❌ Avoid <strong>var</strong></p>
+
+				<h3>✅ Primitive Data Types</h3>
+				<pre><code>"Hello"      // string
+42           // number
+true / false // boolean
+null         // empty on purpose
+undefined    // not assigned yet</code></pre>
+
+				<h3>✅ typeof</h3>
+				<pre><code>typeof "Hi"; // "string"</code></pre>
+
+				<h3>✅ Type Coercion (Basics)</h3>
+				<p>JS sometimes changes types automatically.</p>
+				<pre><code>"5" + 1   // "51"
+"5" - 1   // 4</code></pre>
+				<p>⚠️ Can be confusing — be careful!</p>
+			</section>
+
+			<section id="operators" class="card">
+				<h2>3. Operators</h2>
+				<h3>Arithmetic</h3>
+				<pre><code>+  -  *  /  %</code></pre>
+
+				<h3>Comparison</h3>
+				<pre><code>==   // loose (avoid)
+===  // strict (use this)
+!=  !==  
+!   // NOT</code></pre>
+
+				<h3>Logical</h3>
+				<pre><code>&&amp;&amp;  // AND
+||  // OR
+!   // NOT</code></pre>
+
+				<h3>Assignment</h3>
+				<pre><code>+= -= *=</code></pre>
+			</section>
+
+			<section id="control-flow" class="card">
+				<h2>4. Control Flow</h2>
+				<h3>if / else</h3>
+				<pre><code>if (age > 10) {
+  console.log("Allowed");
+} else {
+  console.log("Not allowed");
+}</code></pre>
+
+				<h3>switch</h3>
+				<pre><code>switch(day) {
+  case "Mon":
+    break;
+  default:
+}</code></pre>
+
+				<h3>Truthy & Falsy</h3>
+				<p>Falsy values:</p>
+				<pre><code>false, 0, "", null, undefined, NaN</code></pre>
+				<p>Everything else is truthy.</p>
+			</section>
+
+			<section id="loops" class="card">
+				<h2>5. Loops</h2>
+				<h3>for loop</h3>
+				<pre><code>for (let i = 0; i < 5; i++) {
+  console.log(i);
+}</code></pre>
+
+				<h3>while loop</h3>
+				<pre><code>while (score < 10) {
+  score++;
+}</code></pre>
+
+				<h3>do...while</h3>
+				<p>Runs at least once.</p>
+
+				<h3>break & continue</h3>
+				<pre><code>break;     // stop loop
+continue;  // skip step</code></pre>
+			</section>
+
+			<section id="functions" class="card">
+				<h2>6. Functions</h2>
+				<h3>Function Declaration</h3>
+				<pre><code>function greet() {
+  return "Hello";
+}</code></pre>
+
+				<h3>Function Expression</h3>
+				<pre><code>const greet = function() {
+  return "Hi";
+};</code></pre>
+
+				<h3>Arrow Functions</h3>
+				<pre><code>const greet = () => "Hey";</code></pre>
+
+				<h3>Parameters & Return</h3>
+				<pre><code>function add(a, b) {
+  return a + b;
+}</code></pre>
+
+				<h3>Scope Basics</h3>
+				<p>Variables only exist where they are defined.</p>
+			</section>
+
+			<!-- Intermediate Level -->
+			<section id="intermediate-level" class="card">
+				<h2>🟡 Intermediate Level — Core JavaScript</h2>
+				<p><strong>Goal:</strong> Write reusable logic and interact with the page.</p>
+			</section>
+
+			<section id="arrays" class="card">
+				<h2>7. Arrays</h2>
+				<h3>Creating Arrays</h3>
+				<pre><code>const fruits = ["apple", "banana"];</code></pre>
+
+				<h3>Access & Modify</h3>
+				<pre><code>fruits[0]; fruits.push("orange");</code></pre>
+
+				<h3>Array Methods</h3>
+				<pre><code>push() pop() shift() unshift() 
+forEach() map() filter() reduce() find() some() every()</code></pre>
+
+				<h3>Looping Arrays</h3>
+				<pre><code>for (let item of fruits) {
+  console.log(item);
+}</code></pre>
+
+				<h3>Example:</h3>
+				<pre><code>numbers.map(n => n * 2);</code></pre>
+			</section>
+
+			<section id="objects" class="card">
+				<h2>8. Objects</h2>
+				<h3>Object Literal</h3>
+				<pre><code>const user = {
+  name: "Alex",
+  age: 12,
+  greet() {
+    console.log("Hi");
+  }
+};</code></pre>
+
+				<h3>Accessing Properties</h3>
+				<pre><code>user.name; user["age"];</code></pre>
+
+				<h3>Nested Objects</h3>
+				<pre><code>user.address.city;</code></pre>
+			</section>
+
+			<section id="array-methods" class="card">
+				<h2>9. Advanced Array Methods</h2>
+				<pre><code>map() filter() reduce() forEach() find() some() every()</code></pre>
+
+				<h3>Example:</h3>
+				<pre><code>numbers.map(n => n * 2);</code></pre>
+			</section>
+
+			<section id="strings-numbers" class="card">
+				<h2>10. Strings & Numbers</h2>
+				<h3>String Methods</h3>
+				<pre><code>text.toUpperCase(); 
+text.includes("hi");</code></pre>
+
+				<h3>Template Literals</h3>
+				<pre><code>`Hello ${name}`</code></pre>
+
+				<h3>Math Object</h3>
+				<pre><code>Math.random(); 
+Math.floor();</code></pre>
+
+				<h3>Number Formatting</h3>
+				<pre><code>num.toFixed(2);</code></pre>
+			</section>
+
+			<section id="scope-hoisting" class="card">
+				<h2>11. Scope & Hoisting</h2>
+				<h3>Global vs Local</h3>
+				<pre><code>let x = 10; // global</code></pre>
+
+				<h3>Block Scope</h3>
+				<pre><code>if (true) {
+  let y = 5;
+}</code></pre>
+
+				<h3>Hoisting</h3>
+				<p>JS moves declarations to the top (not values).</p>
+				<p>⚠️ Common bug source!</p>
+			</section>
+
+			<!-- Advanced Level -->
+			<section id="advanced-level" class="card">
+				<h2>🔵 Advanced Level — Browser & Logic Mastery</h2>
+				<p><strong>Goal:</strong> Build interactive, dynamic web apps.</p>
+			</section>
+
+			<section id="dom-manipulation" class="card">
+				<h2>12. DOM Manipulation (VERY IMPORTANT ⭐)</h2>
+				<h3>Selecting Elements</h3>
+				<pre><code>document.querySelector("p");</code></pre>
+
+				<h3>Change Text & Style</h3>
+				<pre><code>el.textContent = "Hi";
+el.style.color = "red";</code></pre>
+
+				<h3>Create & Remove</h3>
+				<pre><code>document.createElement("div");
+element.remove();</code></pre>
+
+				<h3>Class Manipulation</h3>
+				<pre><code>el.classList.add("active");</code></pre>
+			</section>
+
+			<section id="events" class="card">
+				<h2>13. Events</h2>
+				<h3>Event Listeners</h3>
+				<pre><code>button.addEventListener("click", () => {
+  alert("Clicked!");
+});</code></pre>
+
+				<h3>Event Object</h3>
+				<pre><code>event.target;</code></pre>
+
+				<h3>Bubbling & Capturing</h3>
+				<p>Events move up the DOM tree.</p>
+
+				<h3>Delegation</h3>
+				<p>Handle many elements with one listener.</p>
+			</section>
+
+			<section id="forms-user-input" class="card">
+				<h2>14. Forms & User Input</h2>
+				<h3>Preventing Default</h3>
+				<pre><code>event.preventDefault();</code></pre>
+
+				<h3>Validation</h3>
+				<p>Check empty fields</p>
+				<p>Show friendly messages</p>
+
+				<h3>Accessibility</h3>
+				<p>Labels</p>
+				<p>Focus order</p>
+				<p>Error hints</p>
+			</section>
+
+			<section id="timing-async" class="card">
+				<h2>15. Timing & Async Basics</h2>
+				<h3>setTimeout & setInterval</h3>
+				<pre><code>setTimeout(() => {}, 1000);
+setInterval(() => {}, 1000);</code></pre>
+
+				<h3>Callbacks</h3>
+				<p>Functions passed into functions.</p>
+			</section>
+
+			<section id="error-handling" class="card">
+				<h2>16. Error Handling</h2>
+				<h3>try...catch</h3>
+				<pre><code>try {
+  riskyCode();
+} catch (err) {
+  console.log(err);
+}</code></pre>
+
+				<h3>Debugging Tips</h3>
+				<ul>
+					<li>Read error messages</li>
+					<li>Use console</li>
+					<li>Test small pieces</li>
+				</ul>
+			</section>
+
+			<section id="advanced-functions" class="card">
+				<h2>17. Advanced Functions</h2>
+				<h3>Closures</h3>
+				<p>Functions remember variables.</p>
+
+				<h3>Higher-Order Functions</h3>
+				<p>Functions that use other functions.</p>
+
+				<h3>IIFE</h3>
+				<pre><code>(function() {})();</code></pre>
+
+				<h3>Recursion</h3>
+				<p>A function calling itself.</p>
+			</section>
+
+			<section id="es6-features" class="card">
+				<h2>18. ES6+ Features</h2>
+				<pre><code>const { name } = user;
+[...arr] 
+function greet(name = "Friend") {}
+user?.address?.city ?? "default"</code></pre>
+			</section>
+
+			<!-- Expert Level -->
+			<section id="expert-level" class="card">
+				<h2>🟣 Expert / Master Level — Real-World JavaScript</h2>
+				<p><strong>Goal:</strong> Write JavaScript like a senior frontend developer.</p>
+			</section>
+
+			<section id="asynchronous" class="card">
+				<h2>19. Asynchronous JavaScript</h2>
+				<h3>Promises</h3>
+				<pre><code>fetchData().then().catch();</code></pre>
+
+				<h3>async / await</h3>
+				<pre><code>async function load() {
+  const data = await fetch();
+}</code></pre>
+			</section>
+
+			<section id="fetch-apis" class="card">
+				<h2>20. Fetch & APIs</h2>
+				<pre><code>fetch(url)
+  .then(res => res.json());</code></pre>
+
+				<h3>HTTP Methods</h3>
+				<ul>
+					<li>GET</li>
+					<li>POST</li>
+					<li>PUT</li>
+					<li>DELETE</li>
+				</ul>
+
+				<h3>Loading States</h3>
+				<p>Show spinners or messages.</p>
+			</section>
+
+			<section id="modules" class="card">
+				<h2>21. Modules</h2>
+				<pre><code>export function add() {}
+import { add } from "./file.js";</code></pre>
+			</section>
+
+			<section id="object-oriented" class="card">
+				<h2>22. Object-Oriented JavaScript</h2>
+				<pre><code>class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+extends 
+Inheritance</code></pre>
+			</section>
+
+			<section id="memory-performance" class="card">
+				<h2>23. Memory & Performance</h2>
+				<h3>Call stack = function order</h3>
+				<p>Heap = stored objects</p>
+
+				<h3>Avoid unused variables</h3>
+			</section>
+
+			<!-- Master / Advanced Professional Level -->
+			<section id="master-advanced" class="card">
+				<h2>🔴 Master / Advanced Professional Level</h2>
+				<p><strong>Goal:</strong> Think like a senior JavaScript developer.</p>
+			</section>
+
+			<section id="javascript-internals" class="card">
+				<h2>31. JavaScript Internals</h2>
+				<h3>Execution context</h3>
+				<p>Call stack</p>
+
+				<h3>Event loop</h3>
+				<p>Microtasks vs macrotasks</p>
+				<p>(JS decides when code runs)</p>
+			</section>
+
+			<section id="design-patterns-advanced" class="card">
+				<h2>32. Design Patterns</h2>
+				<h3>Module</h3>
+				<h3>Factory</h3>
+				<h3>Observer</h3>
+				<h3>Singleton</h3>
+				<p>Used to organize big apps.</p>
+			</section>
+
+			<section id="browser-apis-advanced" class="card">
+				<h2>33. Browser APIs</h2>
+				<pre><code>localStorage 
+sessionStorage 
+navigator 
+clipboard</code></pre>
+			</section>
+
+			<section id="testing-advanced" class="card">
+				<h2>34. Testing Advanced</h2>
+				<p>Tests prevent bugs</p>
+				<p>Test small pieces</p>
+				<p>Predict results</p>
+			</section>
+
+			<section id="linting" class="card">
+				<h2>35. Linting</h2>
+				<pre><code>npm</code></pre>
+			</section>
+
+			<section id="bundlers" class="card">
+				<h2>36. Bundlers (concept)</h2>
+				<pre><code>package.json</code></pre>
+			</section>
+		</article>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>&copy; 2025 Ananse — JavaScript Foundations</p>
+		</div>
+	</footer>
+
+	<!-- Prism core + languages -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" defer></script>
+	<script src="js/dark-mode.js" defer></script>
+	<script src="js/course-toc.js" defer></script>
+	<script src="js/scroll-top.js" defer></script>
+
+	<!-- Toggle buttons for example outputs: hide outputs initially and add a Show/Hide button per example -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function(){
+	  document.querySelectorAll('.example-output').forEach(function(out, idx){
+	    // hide output initially
+	    out.style.display = 'none';
+
+	    // create toggle button
+	    var btn = document.createElement('button');
+	    btn.type = 'button';
+	    btn.className = 'btn small';
+	    btn.textContent = 'Show Output';
+
+	    btn.addEventListener('click', function(){
+	      var isHidden = out.style.display === 'none' || getComputedStyle(out).display === 'none';
+	      if(isHidden){ out.style.display = ''; btn.textContent = 'Hide Output'; }
+	      else { out.style.display = 'none'; btn.textContent = 'Show Output'; }
+	    });
+
+	    // insert the button before the output element
+	    out.parentNode.insertBefore(btn, out);
+	  });
+	});
+	</script>
+</body>
+</html>

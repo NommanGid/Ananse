@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ananse — Learn Web Development</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <meta name="description" content="Ananse is a comprehensive platform for learning web development from beginner to expert." />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Ananse</a>
+      <button id="darkModeToggle" class="dark-toggle" aria-pressed="false">Dark Mode</button>
+      <nav class="nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="tutorials.html">Tutorials</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <h1>Master Web Development with Ananse</h1>
+      <p class="muted">Learn HTML, CSS, and JavaScript from beginner to expert with our comprehensive courses and tutorials.</p>
+      <div class="search">
+        <input type="search" placeholder="Search for tutorials..." id="search" />
+      </div>
+    </section>
+
+    <section class="container main-content">
+      <h2>Popular Courses</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>HTML Complete Course</h3>
+          <p class="muted-small">Learn the fundamentals of web structure and semantic HTML5.</p>
+          <a href="html-course-new.html" class="btn primary">Start Learning</a>
+        </div>
+        <div class="card">
+          <h3>CSS Complete Course</h3>
+          <p class="muted-small">Master styling, layouts, animations, and modern CSS techniques.</p>
+          <a href="css-course.html" class="btn primary">Start Learning</a>
+        </div>
+        <div class="card">
+          <h3>JavaScript Complete Course</h3>
+          <p class="muted-small">Build interactive websites with JavaScript from basics to advanced.</p>
+          <a href="js-course.html" class="btn primary">Start Learning</a>
+        </div>
+      </div>
+
+      <h2>Why Choose Ananse?</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Comprehensive Content</h3>
+          <p>Our courses cover everything from basic concepts to advanced techniques, ensuring you have a solid foundation.</p>
+        </div>
+        <div class="card">
+          <h3>Practical Examples</h3>
+          <p>Learn by doing with real-world examples and hands-on exercises that reinforce your knowledge.</p>
+        </div>
+        <div class="card">
+          <h3>Self-Paced Learning</h3>
+          <p>Study at your own pace with our flexible course structure that adapts to your schedule and learning style.</p>
+        </div>
+      </div>
+
+      <h2>Latest Tutorials</h2>
+      <div id="tutorial-list" class="grid">
+        <!-- Latest tutorials will be loaded here by JavaScript -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Ananse — Learn Web Development</p>
+    </div>
+  </footer>
+
+  <button id="scrollTop" class="scroll-top" aria-label="Scroll to top">↑</button>
+
+  <script src="js/dark-mode.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/scroll-top.js" defer></script>
+</body>
+</html>

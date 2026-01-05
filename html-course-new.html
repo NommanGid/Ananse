@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>HTML Foundations — From Beginner to Expert</title>
+	<link rel="stylesheet" href="css/style.css" />
+	<meta name="description" content="A comprehensive HTML course guide for kids learning to code, from basics to expert level." />
+	<style>
+		:root{--bg:#f7fafc;--card:#fff;--muted:#6b7280;--accent:#2563eb;--max:1100px}
+		*{box-sizing:border-box}
+		body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#0f1724;background:var(--bg);line-height:1.5}
+		.site-header{background:transparent;padding:18px 0;border-bottom:1px solid rgba(15,23,42,0.04)}
+		.container{max-width:var(--max);margin:0 auto;padding:0 18px}
+		.header-inner{display:flex;align-items:center;justify-content:space-between}
+		.brand{font-weight:700;color:var(--accent);text-decoration:none;font-size:1.1rem}
+		.nav a{margin-left:14px;color:var(--muted);text-decoration:none}
+
+		main{display:flex;gap:20px;padding:22px 0}
+		aside{width:260px}
+		.sidebar{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+		.toc{list-style:none;margin:0;padding:0}
+		.toc a{display:block;padding:8px 6px;color:#0f1724;text-decoration:none;border-radius:6px}
+		.toc a:hover{background:#f1f5f9}
+		.toc a.active{background:#e6f0ff;color:var(--accent);font-weight:600}
+
+		article{flex:1;min-width:0}
+		.card{background:var(--card);padding:18px;border-radius:10px;box-shadow:0 6px 20px rgba(2,6,23,0.04);margin-bottom:18px}
+		h1,h2,h3{margin:0 0 10px}
+		p{margin:0 0 12px;color:#0f1724}
+		.muted{color:var(--muted)}
+
+		pre{background:#0b1220;color:#e6eef8;padding:12px;border-radius:8px;overflow:auto;font-family:ui-monospace,monospace;font-size:0.92rem}
+		.example-output{border:1px dashed rgba(2,6,23,0.06);padding:10px;border-radius:6px;background:#fff;margin-top:8px}
+
+		footer{padding:18px 0;color:var(--muted);font-size:0.9rem}
+
+		@media (max-width:900px){
+			main{flex-direction:column}
+			aside{width:100%}
+			/* show toggle button on small screens */
+			.toggle-sidebar{display:inline-flex}
+			/* when sidebar is collapsed hide it (toggled via JS) */
+			aside.collapsed{display:none}
+		}
+
+		/* Sidebar toggle button - hidden on desktop */
+		.toggle-sidebar{display:none;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;border:1px solid rgba(15,23,42,0.04);background:#fff;color:var(--text);cursor:pointer}
+		.toggle-sidebar:focus{outline:3px solid rgba(37,99,235,0.12);outline-offset:3px}
+		/* Page-specific override: keep h2 black in course page even when dark-mode is active */
+		body.html-course.dark-mode h2{ color:#000; }
+		/* Make links white on the course page when dark mode is active */
+		body.html-course.dark-mode a{ color:#ffffff; }
+		body.html-course.dark-mode a:visited{ color: #e6e6e6 }
+		body.html-course.dark-mode a:hover{ color:#dcdcdc; text-decoration:underline }
+	</style>
+	<!-- Prism for syntax highlighting in course examples -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+</head>
+<body class="html-course">
+	<header class="site-header">
+		<div class="container header-inner">
+			<a class="brand" href="index.html">Ananse</a>
+			<button id="darkModeToggle" class="dark-toggle" aria-pressed="false">Dark Mode</button>
+			<button id="sidebarToggle" class="toggle-sidebar" aria-controls="sidebar" aria-expanded="true">☰ Topics</button>
+			<nav class="nav" aria-label="Main navigation">
+				<a href="index.html">Home</a>
+				<a href="tutorials.html">Tutorials</a>
+				<a href="about.html">About</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="container">
+		<aside id="sidebar">
+			<div class="sidebar card" aria-labelledby="course-toc">
+				<h3 id="course-toc">Course Topics</h3>
+				<p class="muted">Jump to a lesson</p>
+				<nav>
+					<ul class="toc">
+						<li><a href="#beginner-level">🌱 Beginner Level — HTML Foundations</a></li>
+						<li><a href="#what-html-is">1. What HTML Is</a></li>
+						<li><a href="#basic-document-structure">2. Basic Document Structure</a></li>
+						<li><a href="#text-content-tags">3. Text & Content Tags</a></li>
+						<li><a href="#links-navigation">4. Links & Navigation</a></li>
+						<li><a href="#images-media">5. Images & Media</a></li>
+						<li><a href="#intermediate-level">🟡 Intermediate Level — Structure & Forms</a></li>
+						<li><a href="#lists-tables">6. Lists & Tables</a></li>
+						<li><a href="#semantic-html">7. Semantic HTML</a></li>
+						<li><a href="#forms-inputs">8. Forms & Inputs</a></li>
+						<li><a href="#form-validation">9. Form Validation</a></li>
+						<li><a href="#media-embeds">10. Media & Embeds</a></li>
+						<li><a href="#advanced-level">🔵 Advanced Level — Professional HTML</a></li>
+						<li><a href="#metadata-seo">11. Metadata & SEO Basics</a></li>
+						<li><a href="#accessibility">12. Accessibility (A11Y ♿)</a></li>
+						<li><a href="#advanced-forms">13. Advanced Forms</a></li>
+						<li><a href="#html-apis">14. HTML APIs (Light Intro)</a></li>
+						<li><a href="#media-optimization">15. Media Optimization</a></li>
+						<li><a href="#expert-level">🟣 Expert / Master Level — Real-World HTML</a></li>
+						<li><a href="#web-performance">16. Web Performance with HTML</a></li>
+						<li><a href="#advanced-semantics">17. Advanced Semantics & Patterns</a></li>
+						<li><a href="#html-css-integration">18. HTML & CSS Integration</a></li>
+						<li><a href="#html-javascript-integration">19. HTML & JavaScript Integration</a></li>
+						<li><a href="#cross-browser">20. Cross-Browser & Standards</a></li>
+					</ul>
+				</nav>
+			</div>
+		</aside>
+
+		<article>
+			<section class="card" aria-labelledby="course-title">
+				<h1 id="course-title">HTML Foundations — From Beginner to Expert</h1>
+				<p class="muted">A comprehensive HTML course guide for kids learning to code, from basics to expert level.</p>
+				<h3>Course Overview</h3>
+				<p>This course is divided into four main levels:</p>
+				<ul>
+					<li><strong>🌱 Beginner Level — HTML Foundations:</strong> Understand how web works and create clean basic pages.</li>
+					<li><strong>🟡 Intermediate Level — Structure & Forms:</strong> Build usable, structured, interactive pages.</li>
+					<li><strong>🔵 Advanced Level — Professional HTML:</strong> Write semantic, accessible, scalable markup.</li>
+					<li><strong>🟣 Expert / Master Level — Real-World HTML:</strong> Write HTML like a senior frontend developer.</li>
+				</ul>
+				<h3>Learning Path</h3>
+				<p>Start with HTML basics and progressively build your skills through 20 comprehensive lessons covering everything from basic tags to advanced techniques.</p>
+			</section>
+
+			<!-- Beginner Level -->
+			<section id="beginner-level" class="card">
+				<h2>🌱 Beginner Level — HTML Foundations</h2>
+				<p><strong>Goal:</strong> Understand how web works and create clean basic pages.</p>
+			</section>
+
+			<section id="what-html-is" class="card">
+				<h2>1. What HTML Is</h2>
+				<h3>✅ What is HTML?</h3>
+				<p>HTML (HyperText Markup Language) is used to build the structure of a webpage.</p>
+				<p>Think of a website like a house 🏠:</p>
+				<ul>
+					<li>HTML = walls, doors, rooms</li>
+					<li>CSS = paint, decorations</li>
+					<li>JavaScript = lights, buttons, actions</li>
+				</ul>
+
+				<h3>✅ What HTML Does (Structure, Not Style)</h3>
+				<p>HTML tells the browser:</p>
+				<ul>
+					<li>What is a heading</li>
+					<li>What is a paragraph</li>
+					<li>What is an image or link</li>
+				</ul>
+				<p>❌ HTML does not decide colors or layout — that's CSS.</p>
+
+				<h3>✅ How Browsers Read HTML</h3>
+				<ul>
+					<li>Browser reads HTML top to bottom</li>
+					<li>Builds page structure</li>
+					<li>Displays content visually</li>
+				</ul>
+
+				<h3>✅ HTML vs CSS vs JavaScript</h3>
+				<table style="width: 100%; border-collapse: collapse;">
+					<tr>
+						<th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;">Language</th>
+						<th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;">Job</th>
+					</tr>
+					<tr>
+						<td style="padding: 8px; border-bottom: 1px solid #eee;">HTML</td>
+						<td style="padding: 8px; border-bottom: 1px solid #eee;">Structure</td>
+					</tr>
+					<tr>
+						<td style="padding: 8px; border-bottom: 1px solid #eee;">CSS</td>
+						<td style="padding: 8px; border-bottom: 1px solid #eee;">Style</td>
+					</tr>
+					<tr>
+						<td style="padding: 8px;">JavaScript</td>
+						<td style="padding: 8px;">Behavior</td>
+					</tr>
+				</table>
+
+				<h3>✅ Basic File Structure</h3>
+				<p>HTML files end with .html</p>
+				<pre><code>index.html</code></pre>
+			</section>
+
+			<section id="basic-document-structure" class="card">
+				<h2>2. Basic Document Structure</h2>
+				<h3>✅ DOCTYPE</h3>
+				<pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+				<p>Tells the browser: "This is modern HTML5."</p>
+
+				<h3>✅ Main Tags</h3>
+				<pre><code>&lt;html&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+				<h3>&lt;head&gt;</h3>
+				<p>Holds invisible info:</p>
+				<ul>
+					<li>Title</li>
+					<li>Meta data</li>
+					<li>Links to CSS</li>
+				</ul>
+
+				<h3>&lt;body&gt;</h3>
+				<p>Holds visible content.</p>
+
+				<h3>&lt;title&gt;</h3>
+				<pre><code>&lt;title&gt;My First Website&lt;/title&gt;</code></pre>
+				<p>Shows on the browser tab.</p>
+
+				<h3>&lt;meta charset="UTF-8"&gt;</h3>
+				<p>Allows emojis, symbols, and all languages 🌍</p>
+			</section>
+
+			<section id="text-content-tags" class="card">
+				<h2>3. Text & Content Tags</h2>
+				<h3>Headings</h3>
+				<pre><code>&lt;h1&gt;Main Title&lt;/h1&gt;
+&lt;h2&gt;Subtitle&lt;/h2&gt;
+&lt;h6&gt;Small heading&lt;/h6&gt;</code></pre>
+				<p>⚠️ Only one &lt;h1&gt; per page.</p>
+
+				<h3>Paragraphs</h3>
+				<pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
+
+				<h3>Line Break</h3>
+				<pre><code>&lt;br&gt;</code></pre>
+
+				<h3>Horizontal Rule</h3>
+				<pre><code>&lt;hr&gt;</code></pre>
+
+				<h3>Emphasis & Meaning</h3>
+				<pre><code>&lt;strong&gt;Important&lt;/strong&gt;
+&lt;em&gt;Emphasis&lt;/em&gt;</code></pre>
+
+				<h3>Extra Text Tags</h3>
+				<pre><code>&lt;small&gt;small text&lt;/small&gt;
+&lt;mark&gt;highlight&lt;/mark&gt;
+&lt;del&gt;deleted&lt;/del&gt;
+&lt;ins&gt;inserted&lt;/ins&gt;</code></pre>
+			</section>
+
+			<section id="links-navigation" class="card">
+				<h2>4. Links & Navigation</h2>
+				<h3>Basic Link</h3>
+				<pre><code>&lt;a href="https://example.com"&gt;Visit&lt;/a&gt;</code></pre>
+
+				<h3>Relative vs Absolute URLs</h3>
+				<pre><code>&lt;a href="about.html"&gt;About&lt;/a&gt;
+&lt;a href="https://google.com"&gt;Google&lt;/a&gt;</code></pre>
+
+				<h3>Open in New Tab</h3>
+				<pre><code>&lt;a href="https://example.com" target="_blank"&gt;</code></pre>
+
+				<h3>Anchor Links (Jump on Page)</h3>
+				<pre><code>&lt;a href="#top"&gt;Go Up&lt;/a&gt;
+&lt;h1 id="top"&gt;Top&lt;/h1&gt;</code></pre>
+
+				<h3>Email & Phone Links</h3>
+				<pre><code>&lt;a href="mailto:test@email.com"&gt;Email&lt;/a&gt;
+&lt;a href="tel:+123456789"&gt;Call&lt;/a&gt;</code></pre>
+			</section>
+
+			<section id="images-media" class="card">
+				<h2>5. Images & Media</h2>
+				<h3>Image Basics</h3>
+				<pre><code>&lt;img src="cat.jpg" alt="Cute cat"&gt;</code></pre>
+
+				<h3>ALT Attribute (VERY IMPORTANT ⭐)</h3>
+				<ul>
+					<li>Helps screen readers</li>
+					<li>Shows text if image fails</li>
+					<li>Helps SEO</li>
+				</ul>
+
+				<h3>Image Formats</h3>
+				<table style="width: 100%; border-collapse: collapse;">
+					<tr>
+						<th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;">Format</th>
+						<th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;">Use</th>
+					</tr>
+					<tr>
+						<td style="padding: 8px; border-bottom: 1px solid #eee;">JPG</td>
+						<td style="padding: 8px; border-bottom: 1px solid #eee;">Photos</td>
+					</tr>
+					<tr>
+						<td style="padding: 8px; border-bottom: 1px solid #eee;">PNG</td>
+						<td style="padding: 8px; border-bottom: 1px solid #eee;">Transparent images</td>
+					</tr>
+					<tr>
+						<td style="padding: 8px; border-bottom: 1px solid #eee;">SVG</td>
+						<td style="padding: 8px; border-bottom: 1px solid #eee;">Icons & logos</td>
+					</tr>
+					<tr>
+						<td style="padding: 8px;">WEBP</td>
+						<td style="padding: 8px;">Small & fast</td>
+					</tr>
+				</table>
+
+				<h3>Figure & Caption</h3>
+				<pre><code>&lt;figure&gt;
+  &lt;img src="cat.jpg" alt="Cat"&gt;
+  &lt;figcaption&gt;My cat&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+			</section>
+
+			<!-- Intermediate Level -->
+			<section id="intermediate-level" class="card">
+				<h2>🟡 Intermediate Level — Structure & Forms</h2>
+				<p><strong>Goal:</strong> Build usable, structured, interactive pages.</p>
+			</section>
+
+			<section id="lists-tables" class="card">
+				<h2>6. Lists & Tables</h2>
+				<h3>Lists</h3>
+				<pre><code>&lt;ul&gt;
+  &lt;li&gt;Apple&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+				<pre><code>&lt;ol&gt;
+  &lt;li&gt;Step one&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+
+				<h3>Nested Lists</h3>
+				<pre><code>&lt;ul&gt;
+  &lt;li&gt;Fruit
+    &lt;ul&gt;
+      &lt;li&gt;Apple&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+				<h3>Tables</h3>
+				<pre><code>&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;Name&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;Alice&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+
+				<h3>Table Caption</h3>
+				<pre><code>&lt;caption&gt;Student List&lt;/caption&gt;</code></pre>
+			</section>
+
+			<section id="semantic-html" class="card">
+				<h2>7. Semantic HTML (CRITICAL ⚠️)</h2>
+				<h3>Why Semantics Matter</h3>
+				<ul>
+					<li>Better accessibility</li>
+					<li>Better SEO</li>
+					<li>Easier to read code</li>
+				</ul>
+
+				<h3>Semantic Tags</h3>
+				<pre><code>&lt;header&gt;&lt;/header&gt;
+&lt;nav&gt;&lt;/nav&gt;
+&lt;main&gt;&lt;/main&gt;
+&lt;section&gt;&lt;/section&gt;
+&lt;article&gt;&lt;/article&gt;
+&lt;aside&gt;&lt;/aside&gt;
+&lt;footer&gt;&lt;/footer&gt;</code></pre>
+
+				<h3>Extra Semantics</h3>
+				<pre><code>&lt;address&gt;
+&lt;time&gt;</code></pre>
+			</section>
+
+			<section id="forms-inputs" class="card">
+				<h2>8. Forms & Inputs</h2>
+				<h3>Form Structure</h3>
+				<pre><code>&lt;form&gt;
+  &lt;label&gt;Name&lt;/label&gt;
+  &lt;input type="text"&gt;
+&lt;/form&gt;</code></pre>
+
+				<h3>Input Types</h3>
+				<pre><code>&lt;input type="email"&gt;
+&lt;input type="password"&gt;
+&lt;input type="number"&gt;
+&lt;input type="date"&gt;
+&lt;input type="file"&gt;</code></pre>
+
+				<h3>Label (Accessibility)</h3>
+				<pre><code>&lt;label for="name"&gt;Name&lt;/label&gt;
+&lt;input id="name"&gt;</code></pre>
+
+				<h3>Placeholder vs Value</h3>
+				<pre><code>placeholder="Enter name"
+value="John"</code></pre>
+
+				<h3>Attributes</h3>
+				<pre><code>required
+readonly
+disabled</code></pre>
+
+				<h3>Select & Textarea</h3>
+				<pre><code>&lt;select&gt;&lt;/select&gt;
+&lt;textarea&gt;&lt;/textarea&gt;
+&lt;button&gt;Submit&lt;/button&gt;</code></pre>
+			</section>
+
+			<section id="form-validation" class="card">
+				<h2>9. Form Validation</h2>
+				<h3>Built-in Validation</h3>
+				<p>Browser checks inputs automatically.</p>
+
+				<h3>Pattern Attribute</h3>
+				<pre><code>&lt;input pattern="[A-Za-z]+"&gt;</code></pre>
+
+				<h3>Error Handling Basics</h3>
+				<ul>
+					<li>Clear messages</li>
+					<li>Easy fixes</li>
+				</ul>
+
+				<h3>Accessibility</h3>
+				<ul>
+					<li>Labels</li>
+					<li>Focus order</li>
+					<li>Error hints</li>
+				</ul>
+			</section>
+
+			<section id="media-embeds" class="card">
+				<h2>10. Media & Embeds</h2>
+				<h3>Audio & Video</h3>
+				<pre><code>&lt;audio controls&gt;&lt;/audio&gt;
+&lt;video controls&gt;&lt;/video&gt;</code></pre>
+
+				<h3>Source</h3>
+				<pre><code>&lt;source src="movie.mp4"&gt;</code></pre>
+
+				<h3>Iframe</h3>
+				<pre><code>&lt;iframe src="https://youtube.com"&gt;&lt;/iframe&gt;</code></pre>
+
+				<h3>Fallback Content</h3>
+				<pre><code>Your browser does not support video.</code></pre>
+			</section>
+
+			<!-- Advanced Level -->
+			<section id="advanced-level" class="card">
+				<h2>🔵 Advanced Level — Professional HTML</h2>
+				<p><strong>Goal:</strong> Write semantic, accessible, scalable markup.</p>
+			</section>
+
+			<section id="metadata-seo" class="card">
+				<h2>11. Metadata & SEO Basics</h2>
+				<pre><code>&lt;meta name="description" content="My site"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;</code></pre>
+
+				<h3>Open Graph</h3>
+				<p>Used for social media previews.</p>
+
+				<h3>Favicons</h3>
+				<pre><code>&lt;link rel="icon" href="favicon.ico"&gt;</code></pre>
+
+				<h3>Robots Meta</h3>
+				<pre><code>&lt;meta name="robots" content="index, follow"&gt;</code></pre>
+			</section>
+
+			<section id="accessibility" class="card">
+				<h2>12. Accessibility (A11Y ♿)</h2>
+				<h3>Screen Readers</h3>
+				<p>Use proper headings and landmarks.</p>
+
+				<h3>ARIA (When Needed)</h3>
+				<pre><code>aria-label="Close"</code></pre>
+
+				<h3>Keyboard Navigation</h3>
+				<p>Tab key must work everywhere.</p>
+
+				<h3>Landmark Regions</h3>
+				<pre><code>header, nav, main, footer</code></pre>
+			</section>
+
+			<section id="advanced-forms" class="card">
+				<h2>13. Advanced Forms</h2>
+				<pre><code>&lt;fieldset&gt;
+  &lt;legend&gt;User Info&lt;/legend&gt;
+&lt;/fieldset&gt;</code></pre>
+
+				<h3>Datalist</h3>
+				<pre><code>&lt;datalist&gt;&lt;/datalist&gt;</code></pre>
+
+				<h3>Output</h3>
+				<pre><code>&lt;output&gt;&lt;/output&gt;</code></pre>
+
+				<h3>Progress & Meter</h3>
+				<pre><code>&lt;progress value="50" max="100"&gt;&lt;/progress&gt;</code></pre>
+
+				<h3>Autocomplete</h3>
+				<pre><code>autocomplete="on"</code></pre>
+			</section>
+
+			<section id="html-apis" class="card">
+				<h2>14. HTML APIs (Light Intro)</h2>
+				<h3>Data Attributes</h3>
+				<pre><code>&lt;div data-user="123"&gt;&lt;/div&gt;</code></pre>
+
+				<h3>Contenteditable</h3>
+				<pre><code>&lt;div contenteditable="true"&gt;&lt;/div&gt;</code></pre>
+
+				<h3>Drag & Drop</h3>
+				<p>HTML supports drag basics.</p>
+			</section>
+
+			<section id="media-optimization" class="card">
+				<h2>15. Media Optimization</h2>
+				<h3>Responsive Images</h3>
+				<pre><code>&lt;img src="small.jpg" srcset="big.jpg 2x"&gt;</code></pre>
+
+				<h3>Lazy Loading</h3>
+				<pre><code>loading="lazy"</code></pre>
+			</section>
+
+			<!-- Expert / Master Level -->
+			<section id="expert-level" class="card">
+				<h2>🟣 Expert / Master Level — Real-World HTML</h2>
+				<p><strong>Goal:</strong> Write HTML like a senior frontend developer.</p>
+			</section>
+
+			<section id="web-performance" class="card">
+				<h2>16. Web Performance with HTML</h2>
+				<h3>Small HTML files</h3>
+				<h3>Load scripts later</h3>
+				<h3>Avoid deep nesting</h3>
+
+				<h3>Script Loading</h3>
+				<pre><code>&lt;script defer&gt;&lt;/script&gt;
+&lt;script async&gt;&lt;/script&gt;</code></pre>
+
+				<h3>Preload & Prefetch</h3>
+				<p>Helps load faster.</p>
+			</section>
+
+			<section id="advanced-semantics" class="card">
+				<h2>17. Advanced Semantics & Patterns</h2>
+				<h3>Details & Summary</h3>
+				<pre><code>&lt;details&gt;
+  &lt;summary&gt;More&lt;/summary&gt;
+&lt;/details&gt;</code></pre>
+
+				<h3>Dialog</h3>
+				<pre><code>&lt;dialog&gt;&lt;/dialog&gt;</code></pre>
+
+				<h3>Template</h3>
+				<pre><code>&lt;template&gt;&lt;/template&gt;</code></pre>
+
+				<h3>Schema & Microdata</h3>
+				<p>Used for search engines.</p>
+			</section>
+
+			<section id="html-css-integration" class="card">
+				<h2>18. HTML & CSS Integration</h2>
+				<h3>Clean class names</h3>
+				<h3>Semantic tags first</h3>
+				<h3>Utility classes later</h3>
+			</section>
+
+			<section id="html-javascript-integration" class="card">
+				<h2>19. HTML & JavaScript Integration</h2>
+				<h3>Use classes for JS</h3>
+				<h3>Use data attributes</h3>
+				<h3>Progressive enhancement</h3>
+			</section>
+
+			<section id="cross-browser" class="card">
+				<h2>20. Cross-Browser & Standards</h2>
+				<h3>Avoid Deprecated Tags</h3>
+				<pre><code>No &lt;font&gt;, &lt;center&gt;, &lt;marquee&gt;</code></pre>
+			</section>
+		</article>
+	</main>
+
+	<footer>
+		<div class="container">
+			<p>&copy; 2025 Ananse — HTML Foundations</p>
+		</div>
+	</footer>
+
+	<!-- Prism core + languages -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
+	<script src="js/dark-mode.js" defer></script>
+	<script src="js/course-toc.js" defer></script>
+	<script src="js/scroll-top.js" defer></script>
+
+	<!-- Toggle buttons for example outputs: hide outputs initially and add a Show/Hide button per example -->
+	<script>
+	document.addEventListener('DOMContentLoaded', function(){
+	  document.querySelectorAll('.example-output').forEach(function(out, idx){
+	    // hide output initially
+	    out.style.display = 'none';
+
+	    // create toggle button
+	    var btn = document.createElement('button');
+	    btn.type = 'button';
+	    btn.className = 'btn small';
+	    btn.textContent = 'Show Output';
+
+	    btn.addEventListener('click', function(){
+	      var isHidden = out.style.display === 'none' || getComputedStyle(out).display === 'none';
+	      if(isHidden){ out.style.display = ''; btn.textContent = 'Hide Output'; }
+	      else { out.style.display = 'none'; btn.textContent = 'Show Output'; }
+	    });
+
+	    // insert the button before the output element
+	    out.parentNode.insertBefore(btn, out);
+	  });
+	});
+	</script>
+</body>
+</html>
