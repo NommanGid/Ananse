@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tutorial — Ananse</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Prism for syntax highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Ananse</a>
+      <button id="darkModeToggle" class="dark-toggle" aria-pressed="false">Dark Mode</button>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="tutorials.html">Tutorials</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <a href="tutorials.html" class="muted">← Back to tutorials</a>
+    <h1 id="title">Loading…</h1>
+    <p id="explanation" class="muted">&nbsp;</p>
+
+    <div class="code-toolbar">
+      <div style="flex:1">
+        <label style="font-size:0.9rem;color:var(--muted)">Code</label>
+        <pre id="code" class="highlight"><code></code></pre>
+      </div>
+      <div class="code-actions">
+        <button id="copyBtn" class="btn small">Copy</button>
+        <button id="runBtn" class="btn small secondary" style="display:none">Run</button>
+      </div>
+    </div>
+
+    <section style="margin-top:14px">
+      <h3>Output</h3>
+      <div id="output" class="output">(no output)</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2025 Ananse</p>
+    </div>
+  </footer>
+
+  <!-- Prism core + common language components -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-clike.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js" defer></script>
+
+  <script src="js/dark-mode.js" defer></script>
+  <script src="js/tutorial.js" defer></script>
+  <script src="js/scroll-top.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Ananse — Learn Coding</title>
+	<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+	<header class="site-header">
+		<div class="container header-inner">
+			<a class="brand" href="index.html">Ananse</a>
+			<button id="darkModeToggle" class="dark-toggle" aria-pressed="false">Dark Mode</button>
+			<nav class="nav">
+				<a href="index.html" class="active">Home</a>
+				<a href="tutorials.html">Tutorials</a>
+				<a href="about.html">About</a>
+			</nav>
+		</div>
+	</header>
+
+	<section class="hero">
+		<div class="container">
+			<h1>Learn to code — simple, friendly tutorials</h1>
+			<p>Short explanations, clear examples, and runnable snippets for beginners.</p>
+			<div class="search">
+				<input id="search" type="search" placeholder="Search tutorials (e.g. JavaScript, arrays)" />
+			</div>
+		</div>
+	</section>
+
+	<main class="container main-content">
+		<section>
+			<h2>Featured Tutorials</h2>
+			<div id="tutorial-list" class="grid"></div>
+		</section>
+    
+		<section class="languages-section" style="margin-top:28px">
+			<h2>Languages</h2>
+			<p class="muted">Pick a language to get started with curated beginner content.</p>
+			<div class="lang-grid">
+				<article class="lang-card cpp">
+					<div class="lang-icon">🟦</div>
+					<h3>C++</h3>
+					<p>Learn fundamentals: variables, pointers, and simple programs.</p>
+					<a class="btn" href="tutorials.html">Explore</a>
+				</article>
+
+				<article class="lang-card python">
+					<div class="lang-icon">🐍</div>
+					<h3>Python</h3>
+					<p>Readable syntax, great for beginners — scripting and data basics.</p>
+					<a class="btn" href="tutorials.html">Explore</a>
+				</article>
+
+				<article class="lang-card js">
+					<div class="lang-icon">✨</div>
+					<h3>JavaScript</h3>
+					<p>Interact with the web: DOM, events, and simple apps.</p>
+					<a class="btn" href="tutorials.html">Explore</a>
+				</article>
+
+				<article class="lang-card html">
+					<div class="lang-icon">🟧</div>
+					<h3>HTML</h3>
+					<p>Structure webpages with semantic elements and accessible markup.</p>
+					<a class="btn" href="tutorials.html">Explore</a>
+				</article>
+
+				<article class="lang-card css">
+					<div class="lang-icon">🎨</div>
+					<h3>CSS</h3>
+					<p>Style layouts, colors, and responsive pages with modern CSS.</p>
+					<a class="btn" href="tutorials.html">Explore</a>
+				</article>
+
+				<article class="lang-card java">
+					<div class="lang-icon">☕</div>
+					<h3>Java</h3>
+					<p>Object-oriented programming, classes, and basic tooling.</p>
+					<a class="btn" href="tutorials.html">Explore</a>
+				</article>
+			</div>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="container">
+			<p>&copy; 2025 Ananse — Simple Coding Tutorials</p>
+		</div>
+	</footer>
+
+	<script src="js/main.js" defer></script>
+	<script src="js/scroll-top.js" defer></script>
+</body>
+</html>

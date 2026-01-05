@@ -1,0 +1,27 @@
+{
+  "id": "html",
+  "title": "HTML Course",
+  "overview": "Learn HTML basics: structure, headings, paragraphs, links, images, lists, forms.",
+  "lessons": [
+    {
+      "id": "what-is-html",
+      "title": "What is HTML?",
+      "content": "<h2>What is HTML?</h2><p>HTML (HyperText Markup Language) is the language used to structure web pages. It uses tags like <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, and <code>&lt;a&gt;</code>.</p>"
+    },
+    {
+      "id": "structure",
+      "title": "Structure of an HTML Document",
+      "content": "<h2>Document Structure</h2><pre>&lt;!doctype html&gt;\n&lt;html&gt;\n  &lt;head&gt;...&lt;/head&gt;\n  &lt;body&gt;...&lt;/body&gt;\n&lt;/html&gt;</pre>"
+    },
+    {
+      "id": "links-and-images",
+      "title": "Links & Images",
+      "content": "<h2>Links & Images</h2><p>Use <code>&lt;a href=\"...\"&gt;</code> for links and <code>&lt;img src=\"...\" alt=\"...\" /&gt;</code> for images.</p>"
+    },
+    {
+      "id": "forms",
+      "title": "Forms",
+      "content": "<h2>Forms</h2><p>Collect input with <code>&lt;form&gt;</code>, <code>&lt;input&gt;</code>, and <code>&lt;button&gt;</code>. Use <code>method</code> and <code>action</code> to submit.</p>"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lesson — Course</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* small layout tweaks for lesson page */
+    .lesson-main{display:flex;gap:20px;padding:24px 0}
+    aside{width:260px}
+    .lesson-content{flex:1}
+    .lesson-nav{display:flex;justify-content:space-between;margin-top:20px}
+    .lesson-list a.completed::after{content:" ✔";color:var(--primary);font-weight:700;margin-left:6px}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">Ananse</a>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container lesson-main">
+    <aside>
+      <div class="sidebar card">
+        <h3 id="course-title">Course</h3>
+        <p id="course-overview" class="muted"></p>
+        <nav>
+          <ul id="lesson-list" class="toc lesson-list"></ul>
+        </nav>
+      </div>
+    </aside>
+
+    <section class="lesson-content card">
+      <h1 id="lesson-title">Loading...</h1>
+      <div id="lesson-body"></div>
+
+      <div class="lesson-nav">
+        <a id="prev-link" class="btn ghost">← Previous</a>
+        <a id="next-link" class="btn primary">Next →</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/course-loader.js" defer></script>
+</body>
+</html>

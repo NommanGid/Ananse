@@ -1,0 +1,83 @@
+[
+	{
+		"id": "t1",
+		"language": "JavaScript",
+		"title": "JavaScript: Variables & Types",
+		"level": "Beginner",
+		"tags": ["JavaScript", "Basics"],
+		"description": "Learn about variables, let/const, and basic data types in JavaScript.",
+		"code": "// declare a variable\nlet name = 'Alice';\nconst age = 25;\nconsole.log(name, age);",
+		"output": ""
+	},
+	{
+		"id": "t2",
+		"language": "HTML",
+		"title": "HTML: Building a Simple Page",
+		"level": "Beginner",
+		"tags": ["HTML", "Markup"],
+		"description": "Structure content with headings, paragraphs, and links.",
+		"code": "<!DOCTYPE html>\n<html>\n  <body>\n    <h1>Hello World</h1>\n    <p>This is a simple page.</p>\n  </body>\n</html>",
+		"output": ""
+	},
+	{
+		"id": "t3",
+		"language": "CSS",
+		"title": "CSS: Centering Elements",
+		"level": "Beginner",
+		"tags": ["CSS", "Layout"],
+		"description": "Center blocks and inline content using flexbox and margin techniques.",
+		"code": ".box { display:flex; align-items:center; justify-content:center; }",
+		"output": ""
+	},
+	{
+		"id": "t4",
+		"language": "JavaScript",
+		"title": "JavaScript: Arrays & Loops",
+		"level": "Beginner",
+		"tags": ["JavaScript", "Arrays"],
+		"description": "Work with arrays and loop over items using for/forEach.",
+		"code": "const nums = [1,2,3];\nfor(const n of nums){ console.log(n); }",
+		"output": ""
+	},
+	{
+		"id": "c1",
+		"language": "C",
+		"title": "C: Hello World",
+		"level": "Beginner",
+		"tags": ["C", "Basics"],
+		"description": "Print text to the console using stdio.h and the printf function.",
+		"code": "#include <stdio.h>\n\nint main(void) {\n    printf(\"Hello, World!\\n\");\n    return 0;\n}",
+		"output": "Hello, World!"
+	},
+	{
+		"id": "cpp1",
+		"language": "C++",
+		"title": "C++: Variables and Output",
+		"level": "Beginner",
+		"tags": ["C++", "Basics"],
+		"description": "Declare variables, use std::cout to print values, and return from main.",
+		"code": "#include <iostream>\n#include <string>\n\nint main() {\n    std::string name = \"Alice\";\n    int age = 25;\n    std::cout << name << \" \" << age << std::endl;\n    return 0;\n}",
+		"output": "Alice 25"
+	},
+	{
+		"id": "py1",
+		"language": "Python",
+		"title": "Python: Variables & Print",
+		"level": "Beginner",
+		"tags": ["Python", "Basics"],
+		"description": "Assign variables and use the print function to display values.",
+		"code": "name = 'Alice'\nage = 25\nprint(name, age)",
+		"output": "Alice 25"
+	},
+	{
+		"id": "java1",
+		"language": "Java",
+		"title": "Java: Hello World",
+		"level": "Beginner",
+		"tags": ["Java", "Basics"],
+		"description": "Create a main class and use System.out.println to print to the console.",
+		"code": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}\n",
+		"output": "Hello, World!"
+	}
+]
+
